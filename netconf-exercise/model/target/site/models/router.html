@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>router</title>
+  </head>
+  <body>
+    <h1>router</h1>
+    
+    <h2>Base Information</h2>
+    <table>
+        <tr>
+            <td><strong>prefix</strong></td>
+            <td>router</td>
+        </tr>
+        <tr>
+            <td><strong>namespace</strong></td>
+            <td>urn:sdnhub:odl:tutorial:router</td>
+        </tr>
+        <tr>
+            <td><strong>revision</strong></td>
+            <td>2015-07-28</td>
+        </tr>
+        <tr>
+            <td><strong>description</strong></td>
+            <td>Router configuration</td>
+        </tr>
+        <tr>
+            <td><strong>yang-version</strong></td>
+            <td>1</td>
+        </tr>
+        <tr>
+        </tr>
+    </table>
+    
+    <h3>Child Nodes Summary</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>
+            <a href="#interfaces"><strong>interfaces</strong></a>
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <a href="#router"><strong>router</strong></a>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+    
+    
+    
+    
+    <h2>Datastore Structure</h2>
+    <strong>router</strong>
+    <ul>
+    <li>
+        <a href="#interfaces"><strong>interfaces</strong> [id]
+        </a>
+        <ul>
+        <li>
+            id
+        </li>
+        <li>
+            ip-address
+        </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#router"><strong>router</strong>
+        </a>
+        <ul>
+        <li>
+            <a href="#router/ospf"><strong>ospf</strong> [process-id]
+            </a>
+            <ul>
+            <li>
+                process-id
+            </li>
+            <li>
+                <a href="#router/ospf/networks"><strong>networks</strong> [subnet-ip]
+                </a>
+                <ul>
+                <li>
+                    subnet-ip
+                </li>
+                <li>
+                    area-id
+                </li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#router/bgp"><strong>bgp</strong> [as-number]
+            </a>
+            <ul>
+            <li>
+                as-number
+            </li>
+            <li>
+                router-id
+            </li>
+            <li>
+                <a href="#router/bgp/neighbors"><strong>neighbors</strong> [as-number]
+                </a>
+                <ul>
+                <li>
+                    as-number
+                </li>
+                <li>
+                    peer-ip
+                </li>
+                </ul>
+            </li>
+            </ul>
+        </li>
+        </ul>
+    </li>
+    </ul>
+    
+    <h2>Child nodes</h2>
+    
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong><a href="#router">router</a>
+    </strong> (container)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    <li><strong><a href="#interfaces">interfaces</a>
+    </strong> (list)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3 id="router">
+        router
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:router</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong><a href="#router/ospf">ospf</a>
+    </strong> (list)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    <li><strong><a href="#router/bgp">bgp</a>
+    </strong> (list)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;router xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- ospf -->
+            &lt!-- See <a href="#router/ospf">definition</a>
+             for child nodes.  --&gt
+            &lt!-- This node could appear multiple times --&gt
+            &lt;ospf xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/ospf&gt;
+        <!-- bgp -->
+            &lt!-- See <a href="#router/bgp">definition</a>
+             for child nodes.  --&gt
+            &lt!-- This node could appear multiple times --&gt
+            &lt;bgp xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/bgp&gt;
+        
+        &lt;/router&gt;
+    </pre>
+    </h3>
+    <h3 id="router/ospf">
+        router/ospf
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:router/ospf/{process-id}</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong>process-id</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong><a href="#router/ospf/networks">networks</a>
+    </strong> (list)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;ospf xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- process-id -->
+            &lt;process-id xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/process-id&gt;
+        <!-- networks -->
+            &lt!-- See <a href="#router/ospf/networks">definition</a>
+             for child nodes.  --&gt
+            &lt!-- This node could appear multiple times --&gt
+            &lt;networks xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/networks&gt;
+        
+        &lt;/ospf&gt;
+    </pre>
+    </h3>
+    <h3 id="router/ospf/networks">
+        router/ospf/networks
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:router/ospf/{process-id}/networks/{subnet-ip}</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong>subnet-ip</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong>area-id</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;networks xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- subnet-ip -->
+            &lt;subnet-ip xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/subnet-ip&gt;
+        <!-- area-id -->
+            &lt;area-id xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/area-id&gt;
+        
+        &lt;/networks&gt;
+    </pre>
+    </h3>
+    <h3 id="router/bgp">
+        router/bgp
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:router/bgp/{as-number}</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong>as-number</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong>router-id</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong><a href="#router/bgp/neighbors">neighbors</a>
+    </strong> (list)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;bgp xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- as-number -->
+            &lt;as-number xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/as-number&gt;
+        <!-- router-id -->
+            &lt;router-id xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/router-id&gt;
+        <!-- neighbors -->
+            &lt!-- See <a href="#router/bgp/neighbors">definition</a>
+             for child nodes.  --&gt
+            &lt!-- This node could appear multiple times --&gt
+            &lt;neighbors xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/neighbors&gt;
+        
+        &lt;/bgp&gt;
+    </pre>
+    </h3>
+    <h3 id="router/bgp/neighbors">
+        router/bgp/neighbors
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:router/bgp/{as-number}/neighbors/{as-number}</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong>as-number</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong>peer-ip</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;neighbors xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- as-number -->
+            &lt;as-number xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/as-number&gt;
+        <!-- peer-ip -->
+            &lt;peer-ip xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/peer-ip&gt;
+        
+        &lt;/neighbors&gt;
+    </pre>
+    </h3>
+    <h3 id="interfaces">
+        interfaces
+    </h3>
+    <dl>
+      <dt>XML Path</dt>
+      <dd></dd>
+      <dt>Restconf path</dt>
+      <dd><code>router:interfaces/{id}</code></dd>
+    </dl>
+    <h3>Direct children</h3>
+    <ul>
+    <li><strong>id</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    <li><strong>ip-address</strong> (leaf)
+    <ul>
+        <li>configuration data: <strong>true</strong></li>
+        <li>mandatory: <strong>false</strong></li>
+    </ul>
+    </li>
+    </ul>
+    
+    <h3>XML example</h3>
+    <pre>
+        &lt;interfaces xmlns="urn:sdnhub:odl:tutorial:router"&gt;<!-- Child nodes -->
+        <!-- id -->
+            &lt;id xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/id&gt;
+        <!-- ip-address -->
+            &lt;ip-address xmlns="urn:sdnhub:odl:tutorial:router"&gt;...&lt;/ip-address&gt;
+        
+        &lt;/interfaces&gt;
+    </pre>
+    </h3>
+    
+    
+    
+    
+    
+    
+  </body>
+</html>

@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<application xmlns="http://wadl.dev.java.net/2009/02"  xmlns:router="urn:sdnhub:odl:tutorial:router">
+
+	<grammars>
+		<include href="router.yang"/>
+	</grammars>
+	
+	<resources base="http://localhost:9998/restconf">
+		<resource path="config">
+			<method name="POST">
+				<request>
+					<representation mediaType="application/xml" element="interfaces"/>
+					<representation mediaType="text/xml" element="interfaces"/>
+					<representation mediaType="application/json" element="interfaces"/>
+					<representation mediaType="application/yang.data+xml" element="interfaces"/>
+					<representation mediaType="application/yang.data+json" element="interfaces"/>
+				</request>
+			</method>
+			<method name="POST">
+				<request>
+					<representation mediaType="application/xml" element="router"/>
+					<representation mediaType="text/xml" element="router"/>
+					<representation mediaType="application/json" element="router"/>
+					<representation mediaType="application/yang.data+xml" element="router"/>
+					<representation mediaType="application/yang.data+json" element="router"/>
+				</request>
+			</method>
+			<resource path="router:interfaces/{id}">
+				<param required="true" style="template" name="id" type="string"/>
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" element="interfaces"/>
+						<representation mediaType="text/xml" element="interfaces"/>
+						<representation mediaType="application/json" element="interfaces"/>
+						<representation mediaType="application/yang.data+xml" element="interfaces"/>
+						<representation mediaType="application/yang.data+json" element="interfaces"/>
+					</response>
+				</method>
+				<method name="DELETE" />
+				<method name="PUT">
+					<request>
+						<representation mediaType="application/xml" element="interfaces"/>
+						<representation mediaType="text/xml" element="interfaces"/>
+						<representation mediaType="application/json" element="interfaces"/>
+						<representation mediaType="application/yang.data+xml" element="interfaces"/>
+						<representation mediaType="application/yang.data+json" element="interfaces"/>
+					</request>
+				</method>
+			</resource>
+			<resource path="router:router">
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" element="router"/>
+						<representation mediaType="text/xml" element="router"/>
+						<representation mediaType="application/json" element="router"/>
+						<representation mediaType="application/yang.data+xml" element="router"/>
+						<representation mediaType="application/yang.data+json" element="router"/>
+					</response>
+				</method>
+				<method name="DELETE" />
+				<method name="PUT">
+					<request>
+						<representation mediaType="application/xml" element="router"/>
+						<representation mediaType="text/xml" element="router"/>
+						<representation mediaType="application/json" element="router"/>
+						<representation mediaType="application/yang.data+xml" element="router"/>
+						<representation mediaType="application/yang.data+json" element="router"/>
+					</request>
+				</method>
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="ospf"/>
+						<representation mediaType="text/xml" element="ospf"/>
+						<representation mediaType="application/json" element="ospf"/>
+						<representation mediaType="application/yang.data+xml" element="ospf"/>
+						<representation mediaType="application/yang.data+json" element="ospf"/>
+					</request>
+				</method>
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="bgp"/>
+						<representation mediaType="text/xml" element="bgp"/>
+						<representation mediaType="application/json" element="bgp"/>
+						<representation mediaType="application/yang.data+xml" element="bgp"/>
+						<representation mediaType="application/yang.data+json" element="bgp"/>
+					</request>
+				</method>
+				<resource path="ospf/{process-id}">
+					<param required="true" style="template" name="process-id" type="uint32"/>
+					<method name="GET">
+						<response>
+							<representation mediaType="application/xml" element="ospf"/>
+							<representation mediaType="text/xml" element="ospf"/>
+							<representation mediaType="application/json" element="ospf"/>
+							<representation mediaType="application/yang.data+xml" element="ospf"/>
+							<representation mediaType="application/yang.data+json" element="ospf"/>
+						</response>
+					</method>
+					<method name="DELETE" />
+					<method name="PUT">
+						<request>
+							<representation mediaType="application/xml" element="ospf"/>
+							<representation mediaType="text/xml" element="ospf"/>
+							<representation mediaType="application/json" element="ospf"/>
+							<representation mediaType="application/yang.data+xml" element="ospf"/>
+							<representation mediaType="application/yang.data+json" element="ospf"/>
+						</request>
+					</method>
+					<method name="POST">
+						<request>
+							<representation mediaType="application/xml" element="networks"/>
+							<representation mediaType="text/xml" element="networks"/>
+							<representation mediaType="application/json" element="networks"/>
+							<representation mediaType="application/yang.data+xml" element="networks"/>
+							<representation mediaType="application/yang.data+json" element="networks"/>
+						</request>
+					</method>
+					<resource path="networks/{subnet-ip}">
+						<param required="true" style="template" name="subnet-ip" type="string"/>
+						<method name="GET">
+							<response>
+								<representation mediaType="application/xml" element="networks"/>
+								<representation mediaType="text/xml" element="networks"/>
+								<representation mediaType="application/json" element="networks"/>
+								<representation mediaType="application/yang.data+xml" element="networks"/>
+								<representation mediaType="application/yang.data+json" element="networks"/>
+							</response>
+						</method>
+						<method name="DELETE" />
+						<method name="PUT">
+							<request>
+								<representation mediaType="application/xml" element="networks"/>
+								<representation mediaType="text/xml" element="networks"/>
+								<representation mediaType="application/json" element="networks"/>
+								<representation mediaType="application/yang.data+xml" element="networks"/>
+								<representation mediaType="application/yang.data+json" element="networks"/>
+							</request>
+						</method>
+					</resource>
+				</resource>
+				<resource path="bgp/{as-number}">
+					<param required="true" style="template" name="as-number" type="uint32"/>
+					<method name="GET">
+						<response>
+							<representation mediaType="application/xml" element="bgp"/>
+							<representation mediaType="text/xml" element="bgp"/>
+							<representation mediaType="application/json" element="bgp"/>
+							<representation mediaType="application/yang.data+xml" element="bgp"/>
+							<representation mediaType="application/yang.data+json" element="bgp"/>
+						</response>
+					</method>
+					<method name="DELETE" />
+					<method name="PUT">
+						<request>
+							<representation mediaType="application/xml" element="bgp"/>
+							<representation mediaType="text/xml" element="bgp"/>
+							<representation mediaType="application/json" element="bgp"/>
+							<representation mediaType="application/yang.data+xml" element="bgp"/>
+							<representation mediaType="application/yang.data+json" element="bgp"/>
+						</request>
+					</method>
+					<method name="POST">
+						<request>
+							<representation mediaType="application/xml" element="neighbors"/>
+							<representation mediaType="text/xml" element="neighbors"/>
+							<representation mediaType="application/json" element="neighbors"/>
+							<representation mediaType="application/yang.data+xml" element="neighbors"/>
+							<representation mediaType="application/yang.data+json" element="neighbors"/>
+						</request>
+					</method>
+					<resource path="neighbors/{as-number}">
+						<param required="true" style="template" name="as-number" type="uint32"/>
+						<method name="GET">
+							<response>
+								<representation mediaType="application/xml" element="neighbors"/>
+								<representation mediaType="text/xml" element="neighbors"/>
+								<representation mediaType="application/json" element="neighbors"/>
+								<representation mediaType="application/yang.data+xml" element="neighbors"/>
+								<representation mediaType="application/yang.data+json" element="neighbors"/>
+							</response>
+						</method>
+						<method name="DELETE" />
+						<method name="PUT">
+							<request>
+								<representation mediaType="application/xml" element="neighbors"/>
+								<representation mediaType="text/xml" element="neighbors"/>
+								<representation mediaType="application/json" element="neighbors"/>
+								<representation mediaType="application/yang.data+xml" element="neighbors"/>
+								<representation mediaType="application/yang.data+json" element="neighbors"/>
+							</request>
+						</method>
+					</resource>
+				</resource>
+			</resource>
+		</resource>
+	</resources>
+</application>
