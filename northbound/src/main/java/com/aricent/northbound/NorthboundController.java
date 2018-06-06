@@ -12,6 +12,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,10 +29,49 @@ import com.jayway.jsonpath.JsonPath;
 @RestController 
 public class NorthboundController {
 	
+	
+	public Boolean createLink(String sourceNE, String targetNE) {
+		if (sourceNE != null && !sourceNE.isEmpty() 
+				&& targetNE != null && !targetNE.isEmpty()) {
+			Link newLink = new Link();
+			newLink.setSource(sourceNE);
+			newLink.setTarget(targetNE);
+			Database.getInstance().createLink(newLink);
+			return true;
+		} 
+			return false;
+		
+	} 
+	
+	@PostMapping("/createLink")
+	Message createLinkAPI(@RequestBody Link link){
+		System.out.println(link.getSource()+""+link.getTarget());
+		Message message=new Message();
+		if(createLink(link.getSource(),link.getTarget()))
+			 message.setResult("Success");
+		else 
+			 message.setResult("Failed");
+		return message;
+		
+	}
+	
+	
+	
 	             public NE getNE(String name,String status,String host,int port,List<String> capacity){
 	            	     NE ne=new NE();
                      ne.setApiVersion("1.0.0");
-                     ne.setKind("Node");
+                     if(name.toLowerCase().contains("router"))
+                       ne.setKind("Pod");
+                    if(name.toLowerCase().contains("lightweight"))
+                    	ne.setKind("Service");
+                    if(name.toLowerCase().contains("controller-config"))
+                    	ne.setKind("ReplicationController");
+                    if(status.equalsIgnoreCase("connecting"))
+                    	{
+                    	 ne.setKind("Node");
+                    	 status="Disconnected";
+                    	}
+                    System.out.println(ne.getKind());
                      ne.setHost(host);
                      ne.setPort(port);
                      ne.setStatus(status);
@@ -54,7 +95,7 @@ public class NorthboundController {
                 	
                 	RestTemplate restTemplate = new RestTemplate();
                 	String url
-                	  = "http://localhost:8181/restconf/operational/network-topology:network-topology/topology/topology-netconf/";
+                	  = "http://10.204.249.67:8181/restconf/operational/network-topology:network-topology/topology/topology-netconf/";
                 	String plainCreds = "admin:admin";
                 	
                 	String base64Creds = "YWRtaW46YWRtaW4=";
@@ -87,10 +128,10 @@ public class NorthboundController {
                 		 
                 	 
                 	}   
-                     List<Link> relations =new ArrayList<>();
-                     relations.add(new Link().setSource("router1").setTarget("router2"));
+                     //List<Link> relations =new ArrayList<>();
+                     //relations.add(new Link().setSource("router1").setTarget("router2"));
                      output.put("items",items);
-                     output.put("relations", relations);
+                     output.put("relations", Database.getInstance().getLinks());
                      return output;
                                 
                                 

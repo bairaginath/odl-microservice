@@ -1,0 +1,171 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>Topology Graph Example</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        @font-face {
+            font-family: 'FontAwesome';
+            src: url('bower_components/font-awesome/fonts/fontawesome-webfont.woff') format('woff');
+        }
+        @font-face {
+            font-family: 'PatternFlyIcons-webfont';
+            src: url('bower_components/patternfly/dist/fonts/PatternFlyIcons-webfont.woff') format('woff');
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0px;
+            font-family: sans-serif;
+        }
+        kubernetes-topology-graph {
+            border: 40px solid lightgray;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+        }
+        .controls {
+            position: absolute;
+            bottom: 60px;
+            left: 60px;
+            right: 60px;
+            background-color: lightgray;
+            padding: 0 10px;
+        }
+        #selected {
+            float: right;
+            display: block;
+            margin-top: 15px;
+        }
+    </style>
+    <link rel="stylesheet" href="topology-graph.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="topology-graph.js"></script>
+</head>
+<body>
+
+<style>
+    table, th , td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>
+
+
+
+<h2>NE Registration</h2>
+<div ng-app = "mainApp" ng-controller = "studentController">
+
+    <form name = "studentForm" novalidate>
+        <table border = "0">
+            <tr>
+                <td>Enter  Device Name:</td>
+                <td><input name = "name" type = "text" ng-model = "name" required>
+                    <span style = "color:red" ng-show = "studentForm.name.$dirty && studentForm.name.$invalid">
+                        <span ng-show = "studentForm.name.$error.required"></span>
+                     </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter Hostname : </td>
+                <td><input name = "hostname"  type = "text" ng-model = "hostname" required>
+                    <span style = "color:red" ng-show = "studentForm.hostname.$dirty && studentForm.hostname.$invalid">
+                        <span ng-show = "studentForm.hostname.$error.required"></span>
+                     </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter Port : </td>
+                <td><input name = "port"  type = "text" ng-model = "port" required>
+                    <span style = "color:red" ng-show = "studentForm.port.$dirty && studentForm.hostname.$invalid">
+                        <span ng-show = "studentForm.port.$error.required"></span>
+                     </span>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td>
+                    <button ng-click = "reset()">Reset</button>
+                </td>
+                <td>
+                    <button ng-disabled = "studentForm.name.$dirty &&
+                        studentForm.name.$invalid || studentForm.hostname.$dirty &&
+                        studentForm.hostname.$invalid || studentForm.port.$dirty &&
+                        studentForm.port.$invalid" ng-click="submit()">Submit</button>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+    <div class="col-lg-12 col-sm-12 col-xs-12 alert alert-success" ng-show="messageBool">
+        <strong>{{result }}</strong>
+    </div>
+</div>
+
+
+
+
+<script>
+    var mainApp = angular.module("mainApp", []);
+
+    mainApp.controller('studentController', function($scope,$http) {
+        $scope.reset = function(){
+            $scope.name = "device name";
+            $scope.hostname= "localhost";
+            $scope.port=17830;
+        }
+        $scope.submit=function(){
+            console.log($scope.name);
+            console.log($scope.hostname);
+            console.log($scope.port);
+            $scope.messageBool=false;
+            $http({
+                method: 'POST',
+                url: 'http://localhost:9999/registerNE',
+                data:angular.toJson({"name" : $scope.name,"hostname" : $scope.hostname,"port" : $scope.port}) ,
+                headers: {'Content-Type': 'application/json'}
+            }).then(function(response){
+                    console.log(response);
+                    $scope.messageBool=true;
+                    $scope.result=response.data;
+                },function(error){
+                    console.log(error);
+                $scope.messageBool=true;
+                $scope.result=response.data;
+            });
+
+        }
+
+        $scope.reset();
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

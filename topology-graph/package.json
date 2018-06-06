@@ -22,14 +22,14 @@
   "homepage": "https://github.com/kubernetes-ui/topology-graph#readme",
   "devDependencies": {
     "bower": "*",
-    "grunt": "~0.4.5",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-connect": "~0.9.0",
     "grunt-contrib-jshint": "~0.11.1",
     "grunt-contrib-less": "~1.0.0",
-    "grunt-wiredep": "~2.0.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-uglify": "*",
-    "grunt-run": "*"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-run": "*",
+    "grunt-wiredep": "~2.0.0"
   }
 }
